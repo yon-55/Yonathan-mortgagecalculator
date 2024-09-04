@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newcomer Mortgage Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home-page-prospective.html">Home</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="create-account.php">Create an Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="left-background"></div>
+        <div class="right-background"></div>
+
+        <h1>Newcomer Mortgage Calculator</h1>
+        <p>Please enter your income and expenditure values here to calculate an estimate on how much you can borrow.</p>
+        <form id="loanForm">
+            <input type="text" id="income" name="income" placeholder="Income">
+            <input type="text" id="expenditure" name="expenditure" placeholder="Expenditure">
+            <input type="submit" value="Confirm">
+        </form>
+
+        <div id="result"></div>
+    </div>
+    <script>
+        document.getElementById("loanForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+    
+            // Get values from form inputs
+            var incomeInput = document.getElementById("income").value;
+            var expenditureInput = document.getElementById("expenditure").value;
+    
+            // Validate inputs: Check if they are numbers
+            if (!isValidNumber(incomeInput) || !isValidNumber(expenditureInput)) {
+                // Show error message if inputs are not numbers
+                document.getElementById("result").innerHTML = "<p>Error: Please enter valid numbers for income and expenditure.</p>";
+                return; // Exit the function
+            }
+    
+            // Convert input strings to numbers
+            var income = parseFloat(incomeInput);
+            var expenditure = parseFloat(expenditureInput);
+    
+            // Check if expenditure is higher than income
+            if (expenditure > income) {
+                // Show error message
+                document.getElementById("result").innerHTML = "<p>Error: Higher Expenditure than Income. You are ineligible for a loan at the moment.</p>";
+            } else {
+                // Calculate loan amount (Example: 80% of income)
+                var loanAmount = 4*(income-expenditure);
+    
+                // Show loan eligibility message
+                document.getElementById("result").innerHTML = "<p>Based on your income and expenditure, you are eligible to borrow up to £" + loanAmount.toFixed(2) + ".</p>";
+            }
+        });
+    
+        // Function to validate if a string is a valid number
+        function isValidNumber(input) {
+            return !isNaN(input) && isFinite(input);
+        }
+    </script>
+    
+</body>
+
+</html>
