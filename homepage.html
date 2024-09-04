@@ -7,7 +7,7 @@
     <title>Newcomer Mortgage Calculator</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        
+        /* Placeholder for additional styles */
     </style>
 </head>
 
@@ -22,20 +22,25 @@
         </nav>
     </header>
 
-    <div class="container">
-        <div class="left-background"></div>
-        <div class="right-background"></div>
+    <main>
+        <section class="intro">
+            <h1>Newcomer Mortgage Calculator</h1>
+            <p>Please enter your income and expenditure values here to calculate an estimate on how much you can borrow.</p>
+        </section>
 
-        <h1>Newcomer Mortgage Calculator</h1>
-        <p>Please enter your income and expenditure values here to calculate an estimate on how much you can borrow.</p>
-        <form id="loanForm">
-            <input type="text" id="income" name="income" placeholder="Income">
-            <input type="text" id="expenditure" name="expenditure" placeholder="Expenditure">
-            <input type="submit" value="Confirm">
-        </form>
+        <section class="calculator">
+            <form id="loanForm">
+                <label for="income">Income:</label>
+                <input type="text" id="income" name="income" placeholder="Enter your income">
+                <label for="expenditure">Expenditure:</label>
+                <input type="text" id="expenditure" name="expenditure" placeholder="Enter your expenditure">
+                <input type="submit" value="Confirm">
+            </form>
 
-        <div id="result"></div>
-    </div>
+            <div id="result"></div>
+        </section>
+    </main>
+
     <script>
         document.getElementById("loanForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent form submission
@@ -61,7 +66,7 @@
                 document.getElementById("result").innerHTML = "<p>Error: Higher Expenditure than Income. You are ineligible for a loan at the moment.</p>";
             } else {
                 // Calculate loan amount (Example: 80% of income)
-                var loanAmount = 4*(income-expenditure);
+                var loanAmount = 4 * (income - expenditure);
     
                 // Show loan eligibility message
                 document.getElementById("result").innerHTML = "<p>Based on your income and expenditure, you are eligible to borrow up to £" + loanAmount.toFixed(2) + ".</p>";
@@ -73,7 +78,7 @@
             return !isNaN(input) && isFinite(input);
         }
     </script>
-    
+
 </body>
 
 </html>
