@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    #home-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    #chat-container {
+      position: relative;
+      margin-top: 50px; /* Add margin to prevent overlap with the home button */
+    }
+
+    #chat-messages {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 300px;
+      overflow-y: auto;
+    }
+
+    #message-form {
+      display: flex;
+    }
+
+    #message-input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    #message-input:focus {
+      outline: none;
+    }
+
+    button[type="submit"] {
+      padding: 8px 16px;
+      background-color: #8ef1a3;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .user {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+
+    .bot {
+      background-color: #e8f5e9;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <a id="home-button" href="file:///C:/Users/Yonathan/home%20page.html"><i class="fas fa-home"></i></a>
+
+  <div class="container">
+    <h1>Contact Us</h1>
+    
+    <div id="chat-container">
+      <div id="chat-messages"></div>
+      <form id="message-form">
+        <input type="text" id="message-input" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById("message-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+      
+      var messageInput = document.getElementById("message-input");
+      var message = messageInput.value.trim();
+      
+      if (message !== "") {
+        // Display user message
+        displayMessage(message, "user");
+        
+        // Here, you can handle the message, either sending it to the admin or processing it with a chatbot
+        
+        // For demonstration purposes, let's reply with a simple automated response
+        var botResponse = "Thank you for your message! We will get back to you soon.";
+        displayMessage(botResponse, "bot");
+        
+        // Clear input field
+        messageInput.value = "";
+      }
+    });
+
+    function displayMessage(message, sender) {
+      var chatMessages = document.getElementById("chat-messages");
+      var messageElement = document.createElement("div");
+      messageElement.textContent = message;
+      messageElement.classList.add(sender);
+      chatMessages.appendChild(messageElement);
+      chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+    }
+  </script>
+</body>
+</html>
