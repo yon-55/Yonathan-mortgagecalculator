@@ -10,11 +10,12 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #f9f9f9;
     }
 
     .container {
-      max-width: 800px;
-      margin: 20px auto;
+      max-width: 600px;
+      margin: 50px auto;
       padding: 20px;
       background-color: #fff;
       border-radius: 5px;
@@ -23,37 +24,48 @@
 
     h1 {
       margin-top: 0;
-    }
-
-    #home-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 24px;
-      cursor: pointer;
+      text-align: center;
+      color: #333;
     }
 
     #chat-container {
-      position: relative;
-      margin-top: 50px; /* Add margin to prevent overlap with the home button */
+      margin-top: 20px;
     }
 
     #chat-messages {
-      margin-bottom: 10px;
+      height: 300px;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
-      height: 300px;
       overflow-y: auto;
+      background-color: #fafafa;
+    }
+
+    .message {
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      clear: both;
+    }
+
+    .user {
+      background-color: #d9f7d9;
+      float: right;
+    }
+
+    .bot {
+      background-color: #f0f0f0;
+      float: left;
     }
 
     #message-form {
       display: flex;
+      margin-top: 10px;
     }
 
     #message-input {
       flex: 1;
-      padding: 8px;
+      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 3px;
     }
@@ -63,35 +75,22 @@
     }
 
     button[type="submit"] {
-      padding: 8px 16px;
-      background-color: #8ef1a3;
+      padding: 10px 20px;
+      background-color: #007BFF;
       color: #fff;
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      margin-left: 10px;
     }
 
     button[type="submit"]:hover {
       background-color: #0056b3;
     }
 
-    .user {
-      background-color: #f4f4f4;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 5px;
-    }
-
-    .bot {
-      background-color: #e8f5e9;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 5px;
-    }
   </style>
 </head>
 <body>
-  <a id="home-button" href="file:///C:/Users/Yonathan/home%20page.html"><i class="fas fa-home"></i></a>
 
   <div class="container">
     <h1>Contact Us</h1>
@@ -99,7 +98,7 @@
     <div id="chat-container">
       <div id="chat-messages"></div>
       <form id="message-form">
-        <input type="text" id="message-input" placeholder="Type your message here...">
+        <input type="text" id="message-input" placeholder="Type your message here..." required>
         <button type="submit">Send</button>
       </form>
     </div>
@@ -116,11 +115,11 @@
         // Display user message
         displayMessage(message, "user");
         
-        // Here, you can handle the message, either sending it to the admin or processing it with a chatbot
-        
-        // For demonstration purposes, let's reply with a simple automated response
-        var botResponse = "Thank you for your message! We will get back to you soon.";
-        displayMessage(botResponse, "bot");
+        // Simulate bot response
+        setTimeout(function() {
+          var botResponse = getBotResponse(message);
+          displayMessage(botResponse, "bot");
+        }, 1000);
         
         // Clear input field
         messageInput.value = "";
@@ -131,9 +130,20 @@
       var chatMessages = document.getElementById("chat-messages");
       var messageElement = document.createElement("div");
       messageElement.textContent = message;
-      messageElement.classList.add(sender);
+      messageElement.className = 'message ' + sender;
       chatMessages.appendChild(messageElement);
       chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+    }
+
+    function getBotResponse(userMessage) {
+      // Simple bot response logic
+      if (userMessage.toLowerCase().includes("hello")) {
+        return "Hello! How can I help you today?";
+      } else if (userMessage.toLowerCase().includes("help")) {
+        return "Sure, what do you need help with?";
+      } else {
+        return "Thank you for your message! We will get back to you soon.";
+      }
     }
   </script>
 </body>
