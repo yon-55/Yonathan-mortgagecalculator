@@ -27,7 +27,7 @@ h1 {
     text-align: center;
 }
 
-// Header navigation styles //
+/* Header navigation styles */
 
 header {
     background-color: #3498db; 
@@ -88,6 +88,7 @@ p {
     text-align: center;
     font-size: 1.1em; 
     color: #7f8c8d; 
+}
 
 .left-background {
     position: fixed;
@@ -141,3 +142,4 @@ p {
 
 .create-button a:hover {
     background-color: #d35400; 
+}
