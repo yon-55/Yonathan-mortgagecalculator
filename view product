@@ -6,14 +6,95 @@
     <title>Mortgage Products</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
         .mortgage-product {
             border: 1px solid #ccc;
             border-radius: 5px;
-            padding: 10px;
+            padding: 15px;
             margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .product-details {
             font-weight: bold;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -21,35 +102,31 @@
     <header>
         <nav>
             <ul>
-                <li><a href="mortgage-product-table.php">List of products</a></li>
-                <li><a href="log-out.php">Sign Out</a></li>
+                <li><a href="product-table.php">Products Available</a></li>
+                <li><a href="logout.php">Sign Out</a></li>
             </ul>
         </nav>
     </header>
+    
     <div class="container">
-        <div class="left-background"></div> 
-        <div class="right-background"></div> 
-
         <h2>Mortgage Search Bar</h2>
 
         <form method="post">
             <label for="down_payment">Down Payment:</label>
-            <input type="number" id="down_payment" name="down_payment" required><br>
+            <input type="number" id="down_payment" name="down_payment" required>
 
             <label for="loan_term">Loan Term (years):</label>
-            <input type="number" id="loan_term" name="loan_term" required><br>
+            <input type="number" id="loan_term" name="loan_term" required>
 
-            <label for="maximum_loan_amount">Maximum Loan Amount:</label>
-            <input type="number" id="maximum_loan_amount" name="maximum_loan_amount" required><br>
+            <label for="maximum_loan_amount">Max Loan Amount:</label>
+            <input type="number" id="maximum_loan_amount" name="maximum_loan_amount" required>
 
             <input type="submit" value="Submit">
         </form>
 
         <?php
-        // Your PHP code here
-
         // Path to the SQLite database
-        $path = 'C:/xampp/htdocs/Stage-3-1/Isaac Database.db';
+        $path = 'C:\Users\Public\v-apps\xampp\htdocs\Stage3\Yon-Database.db';
         $realPath = realpath($path);
 
         if ($realPath === false) {
@@ -66,43 +143,40 @@
             // Connect to the SQLite database
             $db = new SQLite3($path);
 
-            // Check if the connection is successful
             if (!$db) {
-                echo "Error: Unable to open database.";
+                echo "<p>Error: Unable to open database.</p>";
             } else {
-                // Prepare the SQL statement to fetch mortgage products based on user input criteria
+                // Prepare the SQL statement
                 $stmt = $db->prepare("SELECT * FROM mortgage_product 
                                     WHERE minimum_down_payment <= :down_payment 
                                     AND loan_term <= :loan_term 
                                     AND maximum_loan_amount <= :maximum_loan_amount");
 
-                // Check if the statement was prepared successfully
                 if (!$stmt) {
-                    echo "Error: Unable to prepare statement.";
+                    echo "<p>Error: Unable to prepare statement.</p>";
                 } else {
                     // Bind parameters
-                    $stmt->bindParam(':down_payment', $down_payment);
-                    $stmt->bindParam(':loan_term', $loan_term);
-                    $stmt->bindParam(':maximum_loan_amount', $maximum_loan_amount);
+                    $stmt->bindValue(':down_payment', $down_payment, SQLITE3_INTEGER);
+                    $stmt->bindValue(':loan_term', $loan_term, SQLITE3_INTEGER);
+                    $stmt->bindValue(':maximum_loan_amount', $maximum_loan_amount, SQLITE3_INTEGER);
 
                     // Execute the statement
                     $result = $stmt->execute();
 
-                    // Check if there are matching mortgage products
+                    // Display mortgage products
                     if ($result->numColumns() > 0) {
-                        // Display mortgage products within the specified range
                         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                             echo '<div class="mortgage-product">';
-                            echo '<div class="product-details">Mortgage Product ID: ' . $row["mortgage_product_id"] . '</div>';
-                            echo '<div class="product-details">Mortgage Type: ' . $row["product_name"] . '</div>';
-                            echo '<div class="product-details">Interest Rate: ' . $row["interest_rate"] . '%</div>';
-                            echo '<div class="product-details">Loan Term: ' . $row["loan_term"] . ' years</div>';
-                            echo '<div class="product-details">Maximum Loan Amount: £' . $row["maximum_loan_amount"] . '</div>';
-                            echo '<div class="product-details">Minimum Down Payment: £' . $row["minimum_down_payment"] . '</div>';
+                            echo '<div class="product-details">Mortgage Product ID: ' . htmlspecialchars($row["mortgage_product_id"]) . '</div>';
+                            echo '<div class="product-details">Product Name: ' . htmlspecialchars($row["product_name"]) . '</div>';
+                            echo '<div class="product-details">Interest Rate: ' . htmlspecialchars($row["interest_rate"]) . '%</div>';
+                            echo '<div class="product-details">Loan Term: ' . htmlspecialchars($row["loan_term"]) . ' years</div>';
+                            echo '<div class="product-details">Maximum Loan Amount: £' . htmlspecialchars($row["maximum_loan_amount"]) . '</div>';
+                            echo '<div class="product-details">Minimum Down Payment: £' . htmlspecialchars($row["minimum_down_payment"]) . '</div>';
                             echo '</div>';
                         }
                     } else {
-                        echo "No mortgage products found within the specified range.";
+                        echo "<p>No mortgage products found within the specified range.</p>";
                     }
 
                     // Close the statement and the database connection
