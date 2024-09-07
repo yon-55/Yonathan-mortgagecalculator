@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Create Account</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="home-page-prospective.html">Home</a></li>
+                <li><a href="homepagee.html">Home</a></li>
                 <li><a href="login.php">Login</a></li>
                 <li><a href="create-account.php">Create an Account</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="container">
-        <div class="left-background"></div> 
-        <div class="right-background"></div> 
+        <div class="left-background"></div>
+        <div class="right-background"></div>
         <h1>Create an Account</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <input type="text" id="firstname" name="firstname" placeholder="Enter your First Name">
@@ -31,71 +34,71 @@
         </form>
 
         <?php
-// Path validation
-$path = 'C:\xampp\htdocs\Stage-3-1\Isaac Database.db';
-$realPath = realpath($path);
+        // Path validation
+        $path = "C:\Users\Public\v-apps\xampp\htdocs\Stage3\Yon-Database.db";
+        $realPath = realpath($path);
 
-if ($realPath === false) {
-    die("The path '$path' does not exist.");
-}
+        if ($realPath === false) {
+            echo "<p class='error'>The path '$path' does not exist.</p>";
+        }
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve user input from the form
-    $firstname = $_POST["firstname"];
-    $surname = $_POST["surname"];
-    $password = $_POST["password"];
-    $confirmPassword = $_POST["confirmPassword"]; // New line to get confirm password
-    $email = $_POST["email"];
+        // Check if the form is submitted
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Retrieve user input from the form
+            $firstname = $_POST["firstname"];
+            $surname = $_POST["surname"];
+            $password = $_POST["password"];
+            $confirmPassword = $_POST["confirmPassword"];
+            $email = $_POST["email"];
 
-    // Check if form fields are not empty
-    if (empty($firstname) || empty($surname) || empty($password) || empty($confirmPassword) || empty($email)) {
-        echo "Error: Please fill in all fields.";
-    } else {
-        // Check if passwords match
-        if ($password !== $confirmPassword) {
-            echo "Error: Passwords do not match.";
-        } else {
-            // Connect to the SQLite database
-            $db = new SQLite3($path);
-
-            // Check if the connection is successful
-            if (!$db) {
-                echo "Error: Unable to open database.";
+            // Check if form fields are not empty
+            if (empty($firstname) || empty($surname) || empty($password) || empty($confirmPassword) || empty($email)) {
+                echo "<p class='error'>Error: Please fill in all fields.</p>";
             } else {
-                // Prepare the INSERT statement
-                $stmt = $db->prepare("INSERT INTO user (firstname, surname, password, email) VALUES (:firstname, :surname, :password, :email)");
-
-                // Check if the statement was prepared successfully
-                if (!$stmt) {
-                    echo "Error: Unable to prepare statement.";
+                // Check if passwords match
+                if ($password !== $confirmPassword) {
+                    echo "<p class='error'>Error: Passwords do not match.</p>";
                 } else {
-                    // Bind parameters
-                    $stmt->bindParam(':firstname', $firstname);
-                    $stmt->bindParam(':surname', $surname);
-                    $stmt->bindParam(':password', $password);
-                    $stmt->bindParam(':email', $email);
+                    // Connect to the SQLite database
+                    $db = new SQLite3($path);
 
-                    // Execute the statement
-                    $result = $stmt->execute();
-
-                    // Check if the insertion was successful
-                    if ($result) {
-                        echo "Your account has been successfully created.";
+                    // Check if the connection is successful
+                    if (!$db) {
+                        echo "<p class='error'>Error: Unable to open database.</p>";
                     } else {
-                        echo "Error: Unable to create your account.";
-                    }
+                        // Prepare the INSERT statement
+                        $stmt = $db->prepare("INSERT INTO user (firstname, surname, password, email) VALUES (:firstname, :surname, :password, :email)");
 
-                    // Close the statement and the database connection
-                    $stmt->close();
-                    $db->close();
+                        // Check if the statement was prepared successfully
+                        if (!$stmt) {
+                            echo "<p class='error'>Error: Unable to prepare statement.</p>";
+                        } else {
+                            // Bind parameters using bindValue
+                            $stmt->bindValue(':firstname', $firstname, SQLITE3_TEXT);
+                            $stmt->bindValue(':surname', $surname, SQLITE3_TEXT);
+                            $stmt->bindValue(':password', $password, SQLITE3_TEXT);
+                            $stmt->bindValue(':email', $email, SQLITE3_TEXT);
+
+                            // Execute the statement
+                            $result = $stmt->execute();
+
+                            // Check if the insertion was successful
+                            if ($result) {
+                                echo "<p class='success'>Your account has been successfully created.</p>";
+                            } else {
+                                echo "<p class='error'>Error: Unable to create your account.</p>";
+                            }
+
+                            // Close the statement and the database connection
+                            $stmt->close();
+                            $db->close();
+                        }
+                    }
                 }
             }
         }
-    }
-}
-?>
-
+        ?>
     </div>
 </body>
+
 </html>
