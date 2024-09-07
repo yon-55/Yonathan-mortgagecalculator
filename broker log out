@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .sidebar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 200px;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: auto;
+        }
+
+        .sidebar nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar nav ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 8px;
+        }
+
+        .sidebar nav ul li a:hover {
+            background-color: #575757;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .logout-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .button-container button:nth-of-type(1) {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .button-container button:nth-of-type(1):hover {
+            background-color: #0056b3;
+        }
+
+        .button-container button:nth-of-type(2) {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .button-container button:nth-of-type(2):hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="homepagee.html">Home</a></li>
+                <li><a href="logout.php">Broker Log out</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <h1>Logout</h1>
+            <div class="logout-message">Are you sure you want to log out?</div>
+            <div class="button-container">
+                <a href="view-product.php"><button>No</button></a>
+                <a href="login.php"><button>Yes</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
