@@ -3,15 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Deletion Successful</title>
+    <title>Successful Account Deletion </title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Additional styles here */
+        /* Base styles */
         body {
             background-color: #f3f3f3;
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         .container {
@@ -23,7 +47,18 @@
             background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin: 0;
         }
     </style>
 </head>
@@ -37,12 +72,9 @@
     </header>
 
     <div class="container">
-        <div class="left-background"></div> 
-        <div class="right-background"></div> 
-        
         <h1>Account Deletion Successful</h1>
         <div class="message-container">
-            <h2>Account Deletion Successful</h2>
+            <h2>Your account has now been deleted. Thank You!</h2>
         </div>
     </div>
 </body>
