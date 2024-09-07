@@ -4,10 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newcomer Mortgage Calculator</title>
+    <title>Mortgage Calculator</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Placeholder for additional styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .intro {
+            margin-bottom: 20px;
+        }
+
+        .calculator {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .calculator label {
+            font-weight: bold;
+        }
+
+        .calculator input[type="number"],
+        .calculator input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .calculator input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .calculator input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .error {
+            color: red;
+        }
     </style>
 </head>
 
@@ -15,68 +101,65 @@
     <header>
         <nav>
             <ul>
-                <li><a href="home-page-prospective.html">Home</a></li>
+                <li><a href="homepagee.html">Home</a></li>
                 <li><a href="login.php">Login</a></li>
                 <li><a href="create-account.php">Create an Account</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="intro">
-            <h1>Newcomer Mortgage Calculator</h1>
-            <p>Please enter your income and expenditure values here to calculate an estimate on how much you can borrow.</p>
-        </section>
+        <div class="container">
+            <section class="intro">
+                <h1>Mortgage Calculator</h1>
+            </section>
 
-        <section class="calculator">
-            <form id="loanForm">
-                <label for="income">Income:</label>
-                <input type="text" id="income" name="income" placeholder="Enter your income">
-                <label for="expenditure">Expenditure:</label>
-                <input type="text" id="expenditure" name="expenditure" placeholder="Enter your expenditure">
-                <input type="submit" value="Confirm">
-            </form>
+            <section class="calculator">
+                <form id="loanForm">
+                    <label for="income">Income (£):</label>
+                    <input type="number" id="income" name="income" placeholder="Enter your income" min="0" step="0.01" required>
+                    <label for="expenditure">Expenditure (£):</label>
+                    <input type="number" id="expenditure" name="expenditure" placeholder="Enter your expenditure" min="0" step="0.01" required>
+                    <input type="submit" value="Calculate Loan">
+                </form>
 
-            <div id="result"></div>
-        </section>
+                <div id="result" class="result"></div>
+            </section>
+        </div>
     </main>
 
     <script>
         document.getElementById("loanForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent form submission
-    
+
             // Get values from form inputs
             var incomeInput = document.getElementById("income").value;
             var expenditureInput = document.getElementById("expenditure").value;
-    
-            // Validate inputs: Check if they are numbers
-            if (!isValidNumber(incomeInput) || !isValidNumber(expenditureInput)) {
-                // Show error message if inputs are not numbers
-                document.getElementById("result").innerHTML = "<p>Error: Please enter valid numbers for income and expenditure.</p>";
-                return; // Exit the function
-            }
-    
+
             // Convert input strings to numbers
             var income = parseFloat(incomeInput);
             var expenditure = parseFloat(expenditureInput);
-    
+
+            // Validate inputs: Check if they are numbers
+            if (isNaN(income) || isNaN(expenditure)) {
+                // Show error message if inputs are not numbers
+                document.getElementById("result").innerHTML = "<p class='error'>Error: Please enter valid numbers for income and expenditure.</p>";
+                return; // Exit the function
+            }
+
             // Check if expenditure is higher than income
             if (expenditure > income) {
                 // Show error message
-                document.getElementById("result").innerHTML = "<p>Error: Higher Expenditure than Income. You are ineligible for a loan at the moment.</p>";
+                document.getElementById("result").innerHTML = "<p class='error'>Error: Expenditure exceeds income. You are ineligible for a loan at the moment.</p>";
             } else {
-                // Calculate loan amount (Example: 80% of income)
+                // Calculate loan amount (Example: 4 times the amount left after expenditure)
                 var loanAmount = 4 * (income - expenditure);
-    
+
                 // Show loan eligibility message
                 document.getElementById("result").innerHTML = "<p>Based on your income and expenditure, you are eligible to borrow up to £" + loanAmount.toFixed(2) + ".</p>";
             }
         });
-    
-        // Function to validate if a string is a valid number
-        function isValidNumber(input) {
-            return !isNaN(input) && isFinite(input);
-        }
     </script>
 
 </body>
