@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #3498db;
+            padding: 20px 0;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        header nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            background-color: #2980b9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+        }
+
+        #chat-container {
+            margin-top: 20px;
+        }
+
+        #chat-messages {
+            height: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-y: auto;
+            background-color: #fafafa;
+        }
+
+        .message {
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            clear: both;
+        }
+
+        .user {
+            background-color: #d9f7d9;
+            float: right;
+        }
+
+        .bot {
+            background-color: #f0f0f0;
+            float: left;
+        }
+
+        #message-form {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        #message-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        #message-input:focus {
+            outline: none;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="homepagee.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Contact Us</h1>
+
+        <div id="chat-container">
+            <div id="chat-messages"></div>
+            <form id="message-form">
+                <input type="text" id="message-input" placeholder="Type your message here..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("message-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            var messageInput = document.getElementById("message-input");
+            var message = messageInput.value.trim();
+
+            if (message !== "") {
+                // Display user message
+                displayMessage(message, "user");
+
+                // Simulate bot response
+                setTimeout(function () {
+                    var botResponse = getBotResponse(message);
+                    displayMessage(botResponse, "bot");
+                }, 1000);
+
+                // Clear input field
+                messageInput.value = "";
+            }
+        });
+
+        function displayMessage(message, sender) {
+            var chatMessages = document.getElementById("chat-messages");
+            var messageElement = document.createElement("div");
+            messageElement.textContent = message;
+            messageElement.className = 'message ' + sender;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+        }
+
+        function getBotResponse(userMessage) {
+            // Simple bot response logic
+            if (userMessage.toLowerCase().includes("hello")) {
+                return "Hello! How can I help you today?";
+            } else if (userMessage.toLowerCase().includes("help")) {
+                return "Sure, what do you need help with?";
+            } else {
+                return "Thank you for your message! We will get back to you soon.";
+            }
+        }
+    </script>
+</body>
+
+</html>
