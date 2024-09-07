@@ -5,6 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Mortgage Product</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .title-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .title-container h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        .title-container h2 {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .create-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .create-button button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .create-button button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -21,7 +126,7 @@
 
     <div class="title-container">
         <h1>Create Mortgage Product</h1>
-        <h2 style="text-align: center;">Create Minimum Criteria for Product</h2>
+        <h2>Product Specifications</h2>
     </div>
 
     <div class="container">
@@ -37,9 +142,9 @@
             $mortgageType = $_POST['mortgage_type'];
 
             if (!is_numeric($interestRate) || !is_numeric($secondaryInterestRate) || !is_numeric($maximumLoanAmount) || !ctype_digit($loanTerm) || !is_numeric($minimumDownPayment) || !is_numeric($creditScore)) {
-                echo "Invalid input. Please enter valid numeric values for interest rate, secondary interest rate, maximum loan amount, loan term (a positive integer), minimum down payment, and credit score.";
+                echo "<div class='error-message'>Invalid input. Please enter valid numeric values for interest rate, secondary interest rate, maximum loan amount, loan term (a positive integer), minimum down payment, and credit score.</div>";
             } else {
-                $db = new PDO("sqlite:C:/xampp/htdocs/Stage-3-1/Isaac Database.db");
+                $db = new PDO("sqlite:C:\Users\Public\v-apps\xampp\htdocs\Stage3\Yon-Database.db");
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $sql = "INSERT INTO mortgage_product (product_name, interest_rate, secondary_interest_rate, loan_term, maximum_loan_amount, minimum_down_payment, credit_score, mortgage_type) VALUES (:product_name, :interest_rate, :secondary_interest_rate, :loan_term, :maximum_loan_amount, :minimum_down_payment, :credit_score, :mortgage_type)";
@@ -56,9 +161,9 @@
                 $stmt->bindParam(':mortgage_type', $mortgageType);
 
                 if ($stmt->execute()) {
-                    echo "Mortgage product created successfully!";
+                    echo "<div class='success-message'>Mortgage product created successfully!</div>";
                 } else {
-                    echo "Error creating mortgage product. Please try again.";
+                    echo "<div class='error-message'>Error creating mortgage product. Please try again.</div>";
                 }
             }
         }
@@ -79,7 +184,7 @@
                 <input type="text" id="secondary_interest_rate" name="secondary_interest_rate" placeholder="Enter Secondary Interest Rate" required>
             </div>
             
-            <div style="margin-top: 20px; margin-bottom: 20px;"> 
+            <div class="form-group">
                 <label for="loan_term">Loan Term (months):</label>
                 <input type="number" id="loan_term" name="loan_term" placeholder="Enter Loan Term" required>
             </div>
@@ -109,7 +214,7 @@
             </div>
 
             <div class="create-button">
-                <button type="submit" name="submit_form">Create Mortgage Product</button>
+                <button type="submit" name="submit_form">Create</button>
             </div>
         </form>
     </div>
