@@ -1,23 +1,21 @@
 <?php
-    // Assuming you have a database connection established
-    // You should replace these with your actual database connection code
-    $path = 'C:/xampp/htdocs/Stage-3-1/Isaac Database.db';
-    $realPath = realpath($path);
+// Define the path to the database
+$path = 'C:\Users\Public\v-apps\xampp\htdocs\Stage3\Yon-Database.db';
+$realPath = realpath($path);
 
-    // Initialize error message variable
-    $error_message = "";
+// Initialize error message variable
+$error_message = "";
 
-    // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Retrieve form data
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-        // Check if the database file exists
-        if ($realPath === false) {
-            die("The database file does not exist.");
-        }
-
+    // Check if the database file exists
+    if ($realPath === false) {
+        $error_message = "The database file does not exist.";
+    } else {
         // Open SQLite database connection
         $db = new SQLite3($realPath);
 
@@ -38,7 +36,7 @@
                 $error_message = "Invalid email or password.";
             } else {
                 // Redirect to another page upon successful login
-                header("Location: view_mortgage-product.php"); // Change 'dashboard.php' to your desired page
+                header("Location: view_mortgage-product.php"); // Change to your desired page
                 exit();
             }
 
@@ -46,9 +44,12 @@
             $db->close();
         }
     }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,12 +59,15 @@
         .broker-login-box {
             margin-top: 20px;
         }
+
         .broker-login-box h2 {
             margin-bottom: 10px;
         }
+
         .broker-login-box p {
             margin-bottom: 20px;
         }
+
         .broker-login-button {
             display: inline-block;
             padding: 10px 20px;
@@ -73,9 +77,11 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }
+
         .broker-login-button:hover {
             background-color: #0056b3;
         }
+
         .error-message {
             color: red;
             margin-top: 10px;
@@ -83,20 +89,22 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="home-page-prospective.html">Home</a></li>
+                <li><a href="homepagee.html">Home</a></li>
                 <li><a href="login.php">Login</a></li>
                 <li><a href="create-account.php">Create an Account</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="left-background"></div> 
-    <div class="right-background"></div> 
-    
+    <div class="left-background"></div>
+    <div class="right-background"></div>
+
     <div class="container">
         <h1>Login</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -117,4 +125,5 @@
         </div>
     </div>
 </body>
+
 </html>
