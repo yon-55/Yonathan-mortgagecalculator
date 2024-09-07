@@ -5,19 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error: Higher Income Expenditure</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline styles specific to this page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .navigation {
+            margin-top: 20px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+        }
+
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Error: Higher Income Expenditure</h1>
+        <h1>Error: Increased Spending on Income</h1>
     </header>
 
     <main>
         <section class="error-message">
-            <p>You have entered higher income expenditure, which makes you ineligible for a loan at the moment.</p>
+            <p>You have entered higher income expenditure, sorry you are inelegible for a loan.</p>
         </section>
 
         <section class="navigation">
-            <a href="home-page.html">Go Back</a>
+            <a href="homepagee.html">Back</a>
         </section>
     </main>
 
