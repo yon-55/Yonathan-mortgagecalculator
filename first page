@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Homepage</title>
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4); /* Example gradient background */
+        }
+
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        header nav ul li a:hover {
+            color: #007bff;
+        }
+
+        /* Hero section styles */
+        .hero {
+    height: 100vh;
+    background: linear-gradient(to bottom right, #ff7e5f, #feb47b); /* Adjust gradient colors here */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Features section styles */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 0;
+            background: #fff;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .feature h2 {
+            margin-top: 0;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="homepagee.html">Home</a></li>
+                <li><a href="About-us.html">About Us</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+                <li><a href="broker-login.php">Broker Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Happy Loans</h1>
+                <p>Explore our services and pick the best mortgage plan for you.</p>
+                <a class="cta-button" href="homepagee.html">Get Started</a>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="feature">
+                <h2>Loan Eligiblity</h2>
+                <p>Discover how much you can borrow.</p>
+            </div>
+            <div class="feature">
+                <h2>Mortgage product deals</h2>
+                <p>Explore the best deals in the market.</p>
+            </div>
+            <div class="feature">
+                <h2>Direct Consultaion</h2>
+                <p>We have the best brokers in th country at your disposal!</p>
+            </div>
+        </section>
+        
+        <section class="footer">
+            <p>&copy; 2024 Mortgage Calculator Ltd. All rights reserved.</p>
+        </section>
+    </main>
+</body>
+</html>
