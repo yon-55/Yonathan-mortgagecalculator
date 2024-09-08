@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background: linear-gradient(to bottom right, #ece9e6, #ffffff);
+        }
+
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        header nav ul li a:hover {
+            color: #007bff;
+        }
+
+        /* Main content styles */
+        main {
+            margin-top: 60px; /* To account for fixed header */
+            padding: 20px;
+        }
+
+        .about-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .about-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 40px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .info-box h2 {
+            margin-top: 0;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="page-one.html">Home</a></li>
+                <li><a href="homepagee.html">Services</a></li>
+                <li><a href="create-account.php">Create an Account</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="about-section">
+            <h1>About Us</h1>
+            <p>Welcome to our website! We are dedicated to providing you with the best financial solutions and services. Our team is composed of experienced professionals who are passionate about helping you achieve your financial goals. We specialize in various financial services, including mortgage solutions, investment advice, and more. Our commitment is to offer personalized and high-quality services to meet your unique needs.</p>
+        </section>
+        
+        <section class="info-box">
+            <h2>What is a Mortgage Calculator?</h2>
+            <p>A mortgage calculator is a tool that helps you estimate your monthly mortgage payments based on various factors such as the loan amount, interest rate, and loan term. By inputting these details, the calculator provides a breakdown of your expected monthly payments, including principal and interest. This tool is incredibly useful for planning and budgeting, allowing you to determine how much you can afford to borrow and how different rates and terms will impact your payments. Using a mortgage calculator can help you make informed decisions and find the best mortgage plan for your financial situation.</p>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2024 Mortgage Calculator Ltd. All rights reserved.</p>
+    </footer>
+</body>
+</html>
